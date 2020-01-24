@@ -10,5 +10,3 @@
 package com.bridgelabs.userlist.model
 
 data class User(val name : String, val mobileNumber : String)
-
-data class UserList(val userList : ArrayList<User>)
