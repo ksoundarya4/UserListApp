@@ -5,18 +5,11 @@
     android:layout_height="match_parent">
 
     <TextView
-    android:id="@+id/name"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:padding="@dimen/activity_horizontal_margin"
-    android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/mobileNumber"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/user_name"
+        android:layout_width="322dp"
+        android:layout_height="46dp"
         android:layout_gravity="center"
         android:padding="@dimen/activity_horizontal_margin"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black" />
+
 </LinearLayout>
