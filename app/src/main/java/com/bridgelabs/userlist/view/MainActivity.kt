@@ -24,9 +24,11 @@ class MainActivity : AppCompatActivity() {
 
     /**To read array of user json file from device*/
   private val objectMapper = jacksonObjectMapper()
-    @SuppressLint("SdCardPath")
     private val userList: Array<User> =
         objectMapper.readValue(File("/data/data/com.bridgelabs.userlist/files/user.json"))
+
+    /**To obtain the position of list view */
+    var listPosition : Int = 0
 
     @SuppressLint("SdCardPath")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             user_name, userNames
         )
         simpleList.adapter = arrayAdapter
+
         simpleList.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
 
@@ -53,6 +56,8 @@ class MainActivity : AppCompatActivity() {
                 // Getting userList click value into String variable.
                 val userListViewClickedValue: User = userList[position]
                 Log.d("User", userListViewClickedValue.toString())
+                listPosition = position
+                Log.d("Position",position.toString())
 
                 val displayActivityIntent = Intent(this, DisplayActivity::class.java).apply {
                     putExtra(
