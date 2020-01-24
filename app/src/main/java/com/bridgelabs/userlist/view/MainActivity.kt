@@ -3,8 +3,14 @@ package com.bridgelabs.userlist.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.bridgelabs.userlist.R
 import com.bridgelabs.userlist.R.id.user_name
 import com.bridgelabs.userlist.model.User
@@ -18,15 +24,15 @@ class MainActivity : AppCompatActivity() {
     // Array of strings...
     private val simpleList: ListView by lazy { findViewById<ListView>(R.id.simpleListView) }
 
+    /**To read array of user json file from device*/
+    val objectMapper = jacksonObjectMapper()
+    val userList: Array<User> =
+        objectMapper.readValue(File("/data/data/com.bridgelabs.userlist/files/user.json"))
+
     @SuppressLint("SdCardPath")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        /**To read array of user json file from device*/
-        val objectMapper = jacksonObjectMapper()
-        val userList: Array<User> =
-            objectMapper.readValue(File("/data/data/com.bridgelabs.userlist/files/user.json"))
 
         /**To get user names into array list of userNames */
         val userNames = ArrayList<String>()
@@ -43,19 +49,20 @@ class MainActivity : AppCompatActivity() {
         simpleList.adapter = arrayAdapter
         simpleList.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                val displayActivityIntent = Intent(this, DisplayActivity::class.java)
+
+                // Getting userList click value into String variable.
+                // Getting userList click value into String variable.
+                val userListViewClickedValue: User = userList[position]
+                Log.d("User", userListViewClickedValue.toString())
+
+                val displayActivityIntent = Intent(this, DisplayActivity::class.java).apply {
+                    putExtra(
+                        "UserInfo",
+                        userListViewClickedValue
+                    )
+                }
                 startActivity(displayActivityIntent)
                 Toast.makeText(this, userList[position].toString(), Toast.LENGTH_SHORT).show()
             }
-
-//        val userInfo : TextView = findViewById(user_name)
-//        userInfo.setOnClickListener{userCLick()}
-    }
-
-    private fun userCLick() {
-        Toast.makeText(
-            this, "Text clicked",
-            Toast.LENGTH_SHORT
-        ).show()
     }
 }
