@@ -1,5 +1,6 @@
 package com.bridgelabs.userlist.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -15,21 +16,24 @@ class MainActivity : AppCompatActivity() {
 
     // Array of strings...
     private val simpleList: ListView by lazy { findViewById<ListView>(R.id.simpleListView) }
-    var userName = ArrayList<String>()
-    var mobileNumber = ArrayList<String>()
 
+    @SuppressLint("SdCardPath")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val objectMapper = jacksonObjectMapper()
-        val userList: ArrayList<User> =
-            objectMapper.readValue(File("/home/user/AndroidStudioProjects/UserList/app/src/main/java/com/bridgelabs/userlist/model/user.json"))
+        val userList: Array<User> =
+            objectMapper.readValue(File("/data/data/com.bridgelabs.userlist/files/user.json"))
 
-        val arrayAdapter = ArrayAdapter<User>(
+        val userNames = ArrayList<String>()
+        for (user in userList) {
+         userNames.add(user.name)
+                    }
+        val arrayAdapter = ArrayAdapter<String>(
             this,
             R.layout.activity_listview,
-            R.id.name, userList
+            R.id.name, userNames
         )
         simpleList.adapter = arrayAdapter
     }
