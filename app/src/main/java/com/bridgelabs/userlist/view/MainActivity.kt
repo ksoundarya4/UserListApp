@@ -4,13 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import com.bridgelabs.userlist.R
 import com.bridgelabs.userlist.R.id.user_name
 import com.bridgelabs.userlist.model.User
@@ -25,8 +23,9 @@ class MainActivity : AppCompatActivity() {
     private val simpleList: ListView by lazy { findViewById<ListView>(R.id.simpleListView) }
 
     /**To read array of user json file from device*/
-    val objectMapper = jacksonObjectMapper()
-    val userList: Array<User> =
+  private val objectMapper = jacksonObjectMapper()
+    @SuppressLint("SdCardPath")
+    private val userList: Array<User> =
         objectMapper.readValue(File("/data/data/com.bridgelabs.userlist/files/user.json"))
 
     @SuppressLint("SdCardPath")
