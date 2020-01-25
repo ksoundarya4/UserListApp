@@ -19,7 +19,7 @@ class AddActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_activivty)
+        setContentView(R.layout.activity_add)
 
         val editUserName = findViewById<EditText>(R.id.add_user_name)
         val userName = editUserName.text.toString()
