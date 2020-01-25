@@ -9,28 +9,32 @@
  */
 package com.bridgelabs.userlist.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import com.bridgelabs.userlist.Presenter.AddUser
 import com.bridgelabs.userlist.R
 
-class AddActivity : AppCompatActivity() {
+
+class AddActivity : AppCompatActivity(),View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
 
-        val editUserName = findViewById<EditText>(R.id.add_user_name)
-        val userName = editUserName.text.toString()
-
-        val editUserNumber = findViewById<EditText>(R.id.add_user_mobile_number)
-        val userNumber = editUserNumber.text.toString()
 
         val saveButton = findViewById<Button>(R.id.save_user)
         saveButton.setOnClickListener {
-            val main = MainActivity()
 
+            val addUser = AddUser()
+            val userList = addUser.addUserToList()
+
+            val returnIntent = Intent()
+            returnIntent.putExtra("Add_User_esult", userList)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
         }
     }
 }
