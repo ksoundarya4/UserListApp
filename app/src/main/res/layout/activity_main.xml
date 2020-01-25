@@ -7,12 +7,19 @@
     android:orientation="vertical"
     tools:context=".view.MainActivity">
 
+    <Button
+        android:id="@+id/add_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add" />
+
     <ListView
         android:id="@+id/simpleListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/material_blue_grey_800"
         android:dividerHeight="1dp">
+
     </ListView>
 
 </LinearLayout>
