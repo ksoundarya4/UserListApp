@@ -11,4 +11,4 @@ package com.bridgelabs.userlist.model
 
 import java.io.Serializable
 
-data class User(val name : String, val mobileNumber : String) : Serializable
+data class User(val name : String, val mobileNumber : String) : Serializable,Model
