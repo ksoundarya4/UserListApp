@@ -12,13 +12,14 @@ package com.bridgelabs.userlist.model
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import java.io.File
+import java.io.InputStream
 import java.lang.Exception
 
-class FileSystem {
+class FileSystem : Model {
 
     private val objectMapper = jacksonObjectMapper()
 
-    fun readUser(file: File): ArrayList<User> {
+    fun readUser(file: InputStream): ArrayList<User> {
         val userList: ArrayList<User> = objectMapper.readValue(file)
         return userList
     }
