@@ -1,3 +1,13 @@
+/**
+ * UserListApp
+ * @purpose To display user details i.e user name and
+ * user mobile number in new activity and to perform
+ * delete that user from user list.
+ * @file DisplayActivity.kt
+ * @author ksoundarya4
+ * @version 1.0
+ * @since 24/01/2020
+ */
 package com.bridgelabs.userlist.view
 
 import android.os.Bundle
@@ -23,12 +33,12 @@ class DisplayActivity : AppCompatActivity() {
         val numberHolder = intent.getSerializableExtra("UserInfo") as User
         editUserNumber.setText(numberHolder.mobileNumber)
 
-        val deleteButton  = findViewById<Button>(R.id.delete_user)
+        val deleteButton = findViewById<Button>(R.id.delete_user)
 
         deleteButton.setOnClickListener(View.OnClickListener {
             val main = MainActivity()
-            val user: ListView = main.findViewById(R.id.simpleListView)
-            user
+            val user = main.simpleList
+            user.removeViewAt(main.listPosition)
         })
     }
 }
