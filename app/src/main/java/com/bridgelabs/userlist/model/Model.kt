@@ -1,7 +1,7 @@
 /**
  * UserListAPP
- * @purpose TO create a file system class which
- * can write to .json file and read from .json file
+ * @purpose To create model interface to implement
+ * lose coupling.
  * @file Model.kt
  * @author ksoundarya4
  * @version 1.0
