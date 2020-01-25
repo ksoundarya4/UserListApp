@@ -11,4 +11,5 @@ package com.bridgelabs.userlist.view
 
 /**View Interface*/
 interface View {
+
 }
