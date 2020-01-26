@@ -2,6 +2,7 @@ package com.bridgelabs.userlist.list_module.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.bridgelabs.userlist.list_module.model.ListModelContractImpl
 import com.bridgelabs.userlist.list_module.model.User
 import com.bridgelabs.userlist.list_module.presenter.ListPresenterImpl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.*
 
 class ListActivity : AppCompatActivity(), ListViewContract {
 
@@ -30,7 +32,15 @@ class ListActivity : AppCompatActivity(), ListViewContract {
         setContentView(R.layout.activity_list)
 
         presenterContract.initUI()
+
+        val addButton = findViewById<FloatingActionButton>(R.id.add_user_button)
+        addButton.setOnClickListener { view -> presenterContract.onAddButtonClick() }
     }
+
+    override fun initAddUser(view: View) {
+        presenterContract.onAddButtonClick()
+    }
+
 
     override fun initListView(arrayList: List<User>) {
         val arrayAdapter =
