@@ -8,12 +8,12 @@ import java.io.InputStream
 class FileSystem {
     private val objectMapper = jacksonObjectMapper()
 
-    fun readUser(file: InputStream): ArrayList<User> {
+    fun readUser(file: InputStream): List<User> {
         val userList: ArrayList<User> = objectMapper.readValue(file)
         return userList
     }
 
-    fun saveUser(file: File, userList : ArrayList<User>) {
+    fun saveUser(file: File, userList : List<User>) {
         try{
             objectMapper.writeValue(file,userList)
         }catch(exception : Exception){
