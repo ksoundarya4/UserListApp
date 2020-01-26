@@ -9,8 +9,9 @@ import com.bridgelabs.userlist.R
 import com.bridgelabs.userlist.list_module.list_contract.ListPresenterContract
 import com.bridgelabs.userlist.list_module.list_contract.ListViewContract
 import com.bridgelabs.userlist.list_module.model.ListModelContractImpl
+import com.bridgelabs.userlist.list_module.model.User
 import com.bridgelabs.userlist.list_module.presenter.ListPresenterImpl
-import com.bridgelabs.userlist.model.User
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListActivity : AppCompatActivity(), ListViewContract {
 
@@ -21,6 +22,7 @@ class ListActivity : AppCompatActivity(), ListViewContract {
             ListModelContractImpl()
         )
     }
+    private val addButton = findViewById<FloatingActionButton>(R.id.add_user_button)
     private val PICK_USER_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,6 @@ class ListActivity : AppCompatActivity(), ListViewContract {
 
     override fun navigateToAddActivity() {
         val addActivityIntent = Intent(this, AddActivity::class.java)
-
         startActivityForResult(addActivityIntent, PICK_USER_REQUEST)
     }
 }
