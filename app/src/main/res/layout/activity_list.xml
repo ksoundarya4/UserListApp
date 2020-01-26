@@ -18,7 +18,20 @@
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" >
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_user_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_add_white_48dp"
+            tools:srcCompat="@tools:sample/avatars" />
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
