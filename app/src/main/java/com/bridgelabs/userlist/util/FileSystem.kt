@@ -1,4 +1,4 @@
-package com.bridgelabs.userlist.list_module.model
+package com.bridgelabs.userlist.util
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue

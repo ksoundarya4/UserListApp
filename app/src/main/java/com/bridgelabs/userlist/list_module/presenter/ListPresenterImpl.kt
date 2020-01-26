@@ -3,7 +3,9 @@ package com.bridgelabs.userlist.list_module.presenter
 import com.bridgelabs.userlist.list_module.list_contract.ListModelContract
 import com.bridgelabs.userlist.list_module.list_contract.ListPresenterContract
 import com.bridgelabs.userlist.list_module.list_contract.ListViewContract
-import com.bridgelabs.userlist.list_module.model.User
+import com.bridgelabs.userlist.util.FileSystem
+import com.bridgelabs.userlist.util.User
+import java.io.InputStream
 
 class ListPresenterImpl(val view: ListViewContract, val model: ListModelContract) :
     ListPresenterContract {
@@ -17,9 +19,14 @@ class ListPresenterImpl(val view: ListViewContract, val model: ListModelContract
         view.navigateToAddActivity()
     }
 
-    override fun onItemClick(position : Int) {
+    override fun onItemClick(position: Int) {
         val userList = model.getListOfUsers()
-        val clickedUser : User = userList[position]
+        val clickedUser: User = userList[position]
         view.navigateToDetailActivity(clickedUser)
+    }
+
+    override fun getUserList(inputStream: InputStream) : List<User> {
+        val fileSystem = FileSystem()
+        return fileSystem.readUser(inputStream)
     }
 }

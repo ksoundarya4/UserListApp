@@ -12,17 +12,20 @@ import com.bridgelabs.userlist.detail_module.view.DetailActivity
 import com.bridgelabs.userlist.list_module.list_contract.ListPresenterContract
 import com.bridgelabs.userlist.list_module.list_contract.ListViewContract
 import com.bridgelabs.userlist.list_module.model.ListModelContractImpl
-import com.bridgelabs.userlist.list_module.model.User
+import com.bridgelabs.userlist.util.User
 import com.bridgelabs.userlist.list_module.presenter.ListPresenterImpl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.InputStream
 
 class ListActivity : AppCompatActivity(), ListViewContract {
+
+    private val inputStream: InputStream by lazy { assets.open("user.json") }
 
     private val usersListView: ListView by lazy { findViewById<ListView>(R.id.listview_users) }
     private val presenterContract: ListPresenterContract by lazy {
         ListPresenterImpl(
             this,
-            ListModelContractImpl()
+            ListModelContractImpl(presenterContract.getUserList(inputStream) as ArrayList<User>)
         )
     }
     private val PICK_USER_REQUEST = 1
@@ -31,6 +34,9 @@ class ListActivity : AppCompatActivity(), ListViewContract {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+//        val inputStream: InputStream = assets.open("user.json")
+//        presenterContract.getUserList(inputStream)
+
         presenterContract.initUI()
 
         val addButton = findViewById<FloatingActionButton>(R.id.add_user_button)
@@ -38,6 +44,7 @@ class ListActivity : AppCompatActivity(), ListViewContract {
 
         usersListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             presenterContract.onItemClick(position)
+
         }
     }
 

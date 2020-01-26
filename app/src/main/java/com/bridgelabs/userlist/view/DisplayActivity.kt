@@ -16,9 +16,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bridgelabs.userlist.R
+import com.bridgelabs.userlist.detail_module.detail_contract.DetailViewContact
 import com.bridgelabs.userlist.model.User
 
-class DisplayActivity : AppCompatActivity(),com.bridgelabs.userlist.view.View {
+class DisplayActivity : AppCompatActivity(), DetailViewContact {
+    override fun initDetailView() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

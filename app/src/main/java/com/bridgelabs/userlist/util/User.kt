@@ -7,7 +7,7 @@
  * @version 1.0
  * @since 23/01/2020
  */
-package com.bridgelabs.userlist.list_module.model
+package com.bridgelabs.userlist.util
 
 import java.io.Serializable
 
