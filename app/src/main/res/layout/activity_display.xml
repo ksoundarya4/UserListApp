@@ -7,7 +7,7 @@
     tools:context=".view.DisplayActivity">
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/display_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/user_number"
+        android:id="@+id/display_user_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
