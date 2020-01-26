@@ -5,4 +5,5 @@ import com.bridgelabs.userlist.list_module.model.User
 interface ListViewContract {
     fun initListView(arrayList: List<User>)
     fun navigateToAddActivity()
+    fun navigateToDetailActivity(clickedUser: User)
 }
