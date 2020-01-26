@@ -5,4 +5,5 @@ import com.bridgelabs.userlist.model.User
 interface ListPresenterContract {
     fun initUI()
     fun onAddButtonClick()
+    fun onItemClick(position : Int)
 }
