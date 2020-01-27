@@ -3,7 +3,6 @@ package com.bridgelabs.userlist.util
 import android.content.Context
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import java.io.File
 
 class FileSystemImpl(private val context: Context) : FileSystem {
     private val objectMapper = jacksonObjectMapper()
@@ -13,8 +12,11 @@ class FileSystemImpl(private val context: Context) : FileSystem {
         return objectMapper.readValue<ArrayList<User>>(inputStream)
     }
 
-    override fun saveUser(file: File, userList: List<User>) {
+    override fun saveUser() {
         try {
+            val assertFileDescriptor = context.assets.openFd("user.json")
+            val file = assertFileDescriptor.createOutputStream()
+            val userList = readUser() as ArrayList<User>
             objectMapper.writeValue(file, userList)
         } catch (exception: Exception) {
             println("write to file failed")
@@ -25,5 +27,5 @@ class FileSystemImpl(private val context: Context) : FileSystem {
 
 interface FileSystem {
     fun readUser(): List<User>
-    fun saveUser(file: File, userList: List<User>)
+    fun saveUser()
 }
