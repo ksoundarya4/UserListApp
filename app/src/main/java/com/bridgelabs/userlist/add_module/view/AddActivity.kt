@@ -1,4 +1,4 @@
-package com.bridgelabs.userlist.list_module.view
+package com.bridgelabs.userlist.add_module.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
