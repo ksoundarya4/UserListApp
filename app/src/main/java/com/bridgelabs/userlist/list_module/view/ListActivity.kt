@@ -1,46 +1,46 @@
+
 package com.bridgelabs.userlist.list_module.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bridgelabs.userlist.R
+import com.bridgelabs.userlist.add_module.view.AddActivity
 import com.bridgelabs.userlist.detail_module.view.DetailActivity
 import com.bridgelabs.userlist.list_module.list_contract.ListPresenterContract
 import com.bridgelabs.userlist.list_module.list_contract.ListViewContract
 import com.bridgelabs.userlist.list_module.model.ListModelContractImpl
 import com.bridgelabs.userlist.util.User
 import com.bridgelabs.userlist.list_module.presenter.ListPresenterImpl
+import com.bridgelabs.userlist.util.FileSystemImpl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.io.InputStream
 
 class ListActivity : AppCompatActivity(), ListViewContract {
-
-    private val inputStream: InputStream by lazy { assets.open("user.json") }
-
+    lateinit var arrayAdapter : ArrayAdapter<User>
     private val usersListView: ListView by lazy { findViewById<ListView>(R.id.listview_users) }
     private val presenterContract: ListPresenterContract by lazy {
         ListPresenterImpl(
             this,
-            ListModelContractImpl(presenterContract.getUserList(inputStream) as ArrayList<User>)
+            ListModelContractImpl(fileSystem = FileSystemImpl(this))
         )
     }
-    private val PICK_USER_REQUEST = 1
+    private val PICK_USER__ADD_REQUEST = 1
+    private val PICK_USER_DELETE_REQUEST = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-//        val inputStream: InputStream = assets.open("user.json")
-//        presenterContract.getUserList(inputStream)
-
         presenterContract.initUI()
 
         val addButton = findViewById<FloatingActionButton>(R.id.add_user_button)
-        addButton.setOnClickListener { view -> presenterContract.onAddButtonClick() }
+        addButton.setOnClickListener { presenterContract.onAddButtonClick() }
 
         usersListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             presenterContract.onItemClick(position)
@@ -49,20 +49,39 @@ class ListActivity : AppCompatActivity(), ListViewContract {
     }
 
     override fun initListView(arrayList: List<User>) {
-        val arrayAdapter =
-            ArrayAdapter<User>(this, R.layout.activity_listview, R.id.user_name, arrayList)
+        arrayAdapter =
+            ArrayAdapter(this, R.layout.activity_listview, R.id.user_name, arrayList)
         usersListView.adapter = arrayAdapter
     }
 
     override fun navigateToAddActivity() {
         val addActivityIntent = Intent(this, AddActivity::class.java)
-        startActivityForResult(addActivityIntent, PICK_USER_REQUEST)
+        startActivityForResult(addActivityIntent, PICK_USER__ADD_REQUEST)
     }
 
     override fun navigateToDetailActivity(clickedUser: User) {
         val addDetailIntent =
             Intent(this, DetailActivity::class.java).apply { putExtra("UserInfo", clickedUser) }
-        startActivityForResult(addDetailIntent, PICK_USER_REQUEST)
+        startActivityForResult(addDetailIntent, PICK_USER_DELETE_REQUEST)
         Toast.makeText(this, clickedUser.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                val user = data?.getSerializableExtra("isAdded") as User
+                arrayAdapter.add(user)
+                presenterContract.initUI()
+            }
+        }
+        if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
+                val user = data?.getSerializableExtra("deleteUser") as User
+                arrayAdapter.remove(user)
+                presenterContract.initUI()
+            }
+        }
     }
 }
