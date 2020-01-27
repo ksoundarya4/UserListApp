@@ -14,13 +14,15 @@ import java.io.InputStream
 
 class DetailActivity : AppCompatActivity(), DetailViewContact {
 
+    val inputStream : InputStream by lazy { assets.open("user.json")}
+
     private val userName = findViewById<TextView>(R.id.display_user_name)
     private val userNumber = findViewById<TextView>(R.id.display_user_number)
 
     private val presenterContract: DetailPresenterContact by lazy {
         DetailPresenterImpl(
             this,
-            DetailModelImpl()
+            DetailModelImpl(presenterContract.getUserList(inputStream) as ArrayList<User>)
         )
     }
 
@@ -44,10 +46,6 @@ class DetailActivity : AppCompatActivity(), DetailViewContact {
         val numberHolder = intent.getSerializableExtra("UserInfo") as User
         userName.setText(nameHolder.name)
         userNumber.setText(numberHolder.mobileNumber)
-    }
-
-    fun getAssets() {
-        this.assets
     }
 }
 
