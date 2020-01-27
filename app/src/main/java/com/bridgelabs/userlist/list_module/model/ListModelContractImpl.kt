@@ -1,9 +1,10 @@
 package com.bridgelabs.userlist.list_module.model
 
 import com.bridgelabs.userlist.list_module.list_contract.ListModelContract
-import com.bridgelabs.userlist.model.User
+import com.bridgelabs.userlist.util.User
 
-class ListModelContractImpl : ListModelContract {
+class ListModelContractImpl(userList : ArrayList<User>) : ListModelContract {
+
     override fun addUser(user: User) {
 
     }

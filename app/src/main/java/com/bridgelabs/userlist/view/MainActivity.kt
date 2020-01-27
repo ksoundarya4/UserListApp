@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity(), View {
             startActivityForResult(addActivityIntent, PICK_USER_REQUEST)
         }
 
-
-
         /**To read list of user*/
         val fileSystem = FileSystem()
         val userList: ArrayList<User> = fileSystem.readUser(assets.open("user.json"))
