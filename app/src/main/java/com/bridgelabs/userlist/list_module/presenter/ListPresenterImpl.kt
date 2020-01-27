@@ -25,8 +25,4 @@ class ListPresenterImpl(val view: ListViewContract, val model: ListModelContract
         view.navigateToDetailActivity(clickedUser)
     }
 
-    override fun getUserList(inputStream: InputStream) : List<User> {
-        val fileSystem = FileSystem()
-        return fileSystem.readUser(inputStream)
-    }
 }

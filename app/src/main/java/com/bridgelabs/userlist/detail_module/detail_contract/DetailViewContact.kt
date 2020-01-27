@@ -6,4 +6,5 @@ import java.io.InputStream
 
 interface DetailViewContact {
     fun initDetailView()
+    fun returnDeleteResult(user : User)
 }
