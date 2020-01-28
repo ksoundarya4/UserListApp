@@ -1,10 +1,17 @@
-
+/**
+ * UserListApp
+ * @description ListActivity implements
+ * the ListViewContract.
+ * @file ListActivity.kt
+ * @author ksoundarya4
+ * @version 1.0
+ * @since 26/01/2020
+ */
 package com.bridgelabs.userlist.list_module.view
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -16,9 +23,9 @@ import com.bridgelabs.userlist.detail_module.view.DetailActivity
 import com.bridgelabs.userlist.list_module.list_contract.ListPresenterContract
 import com.bridgelabs.userlist.list_module.list_contract.ListViewContract
 import com.bridgelabs.userlist.list_module.model.ListModelContractImpl
-import com.bridgelabs.userlist.util.User
+import com.bridgelabs.userlist.list_module.model.User
 import com.bridgelabs.userlist.list_module.presenter.ListPresenterImpl
-import com.bridgelabs.userlist.util.FileSystemImpl
+import com.bridgelabs.userlist.list_module.model.FileSystemImpl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListActivity : AppCompatActivity(), ListViewContract {
@@ -27,7 +34,10 @@ class ListActivity : AppCompatActivity(), ListViewContract {
     private val presenterContract: ListPresenterContract by lazy {
         ListPresenterImpl(
             this,
-            ListModelContractImpl(fileSystem = FileSystemImpl(this))
+            ListModelContractImpl(fileSystem = FileSystemImpl(
+                this
+            )
+            )
         )
     }
     private val PICK_USER__ADD_REQUEST = 1

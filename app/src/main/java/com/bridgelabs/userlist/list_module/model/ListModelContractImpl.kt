@@ -1,9 +1,15 @@
+/**
+ * UserListApp
+ * @description ListModelContractImpl that implements
+ * ListModelContract.
+ * @file ListModelContactImpl.kt
+ * @author ksoundarya4
+ * @version 1.0
+ * @since 26/01/2020
+ */
 package com.bridgelabs.userlist.list_module.model
 
 import com.bridgelabs.userlist.list_module.list_contract.ListModelContract
-import com.bridgelabs.userlist.util.FileSystem
-import com.bridgelabs.userlist.util.User
-import java.io.File
 
 class ListModelContractImpl(private val fileSystem: FileSystem) : ListModelContract {
 

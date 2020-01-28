@@ -1,3 +1,12 @@
+/**
+ * UserListApp
+ * @description AddActivity implements
+ * the AddViewContract.
+ * @file AddActivity.kt
+ * @author ksoundarya4
+ * @version 1.0
+ * @since 26/01/2020
+ */
 package com.bridgelabs.userlist.add_module.view
 
 import android.app.Activity
@@ -12,8 +21,8 @@ import com.bridgelabs.userlist.add_module.add_contract.AddViewContract
 import com.bridgelabs.userlist.add_module.presenter.AddPresenterImpl
 import com.bridgelabs.userlist.list_module.model.ListModelContractImpl
 import com.bridgelabs.userlist.list_module.view.ListActivity
-import com.bridgelabs.userlist.util.FileSystemImpl
-import com.bridgelabs.userlist.util.User
+import com.bridgelabs.userlist.list_module.model.FileSystemImpl
+import com.bridgelabs.userlist.list_module.model.User
 
 class AddActivity : AppCompatActivity(), AddViewContract {
 
@@ -26,7 +35,10 @@ class AddActivity : AppCompatActivity(), AddViewContract {
     }
 
     val presenterContract: AddPresenterContract by lazy {
-        AddPresenterImpl(this, ListModelContractImpl(fileSystem = FileSystemImpl(this)))
+        AddPresenterImpl(this, ListModelContractImpl(fileSystem = FileSystemImpl(
+            this
+        )
+        ))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +54,8 @@ class AddActivity : AppCompatActivity(), AddViewContract {
     override fun saveUser() {
         val userName = editUserName.text.toString()
         val userNumber = editUserNumber.text.toString()
-        val user = User(userName, userNumber)
+        val user =
+            User(userName, userNumber)
         presenterContract.saveUserToList(user)
     }
 

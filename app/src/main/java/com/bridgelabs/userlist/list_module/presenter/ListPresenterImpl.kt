@@ -1,11 +1,18 @@
+/**
+ * UserListApp
+ * @description ListPresenterImpl implements
+ * the ListPresenterContract.
+ * @file ListPresenterImpl.kt
+ * @author ksoundarya4
+ * @version 1.0
+ * @since 26/01/2020
+ */
 package com.bridgelabs.userlist.list_module.presenter
 
 import com.bridgelabs.userlist.list_module.list_contract.ListModelContract
 import com.bridgelabs.userlist.list_module.list_contract.ListPresenterContract
 import com.bridgelabs.userlist.list_module.list_contract.ListViewContract
-import com.bridgelabs.userlist.util.FileSystem
-import com.bridgelabs.userlist.util.User
-import java.io.InputStream
+import com.bridgelabs.userlist.list_module.model.User
 
 class ListPresenterImpl(val view: ListViewContract, val model: ListModelContract) :
     ListPresenterContract {
@@ -24,5 +31,4 @@ class ListPresenterImpl(val view: ListViewContract, val model: ListModelContract
         val clickedUser: User = userList[position]
         view.navigateToDetailActivity(clickedUser)
     }
-
 }
