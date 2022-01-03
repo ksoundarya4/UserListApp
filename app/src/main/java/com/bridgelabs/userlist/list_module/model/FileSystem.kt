@@ -12,5 +12,5 @@ package com.bridgelabs.userlist.list_module.model
 
 interface FileSystem {
     fun readUser(): List<User>
-    fun saveUser()
+    fun saveUser(user: User)
 }

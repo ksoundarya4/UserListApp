@@ -16,7 +16,7 @@ class ListModelContractImpl(private val fileSystem: FileSystem) : ListModelContr
     override fun addUser(user: User) {
         val userList = fileSystem.readUser() as ArrayList<User>
         userList.add(user)
-        fileSystem.saveUser()
+        fileSystem.saveUser(user)
     }
 
     override fun updateUser(user : User) {
@@ -26,7 +26,7 @@ class ListModelContractImpl(private val fileSystem: FileSystem) : ListModelContr
     override fun deleteUser(user: User) {
         val userList = fileSystem.readUser() as ArrayList<User>
         userList.remove(user)
-        fileSystem.saveUser( )
+        fileSystem.saveUser(user)
     }
 
     override fun getListOfUsers(): List<User> {

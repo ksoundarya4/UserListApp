@@ -29,7 +29,7 @@ import com.bridgelabs.userlist.list_module.model.FileSystemImpl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListActivity : AppCompatActivity(), ListViewContract {
-    lateinit var arrayAdapter : ArrayAdapter<User>
+    private lateinit var arrayAdapter : UserListAdapter
     private val usersListView: ListView by lazy { findViewById<ListView>(R.id.listview_users) }
     private val presenterContract: ListPresenterContract by lazy {
         ListPresenterImpl(
@@ -59,8 +59,7 @@ class ListActivity : AppCompatActivity(), ListViewContract {
     }
 
     override fun initListView(arrayList: List<User>) {
-        arrayAdapter =
-            ArrayAdapter(this, R.layout.activity_listview, R.id.user_name, arrayList)
+        arrayAdapter = UserListAdapter(this, arrayList)
         usersListView.adapter = arrayAdapter
     }
 

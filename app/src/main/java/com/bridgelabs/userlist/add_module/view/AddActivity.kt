@@ -26,19 +26,16 @@ import com.bridgelabs.userlist.list_module.model.User
 
 class AddActivity : AppCompatActivity(), AddViewContract {
 
-    val editUserName by lazy {
+    private val editUserName: EditText by lazy {
         findViewById<EditText>(R.id.add_user_name)
     }
 
-    val editUserNumber by lazy {
+   private val editUserNumber by lazy {
         findViewById<EditText>(R.id.add_user_mobile_number)
     }
 
-    val presenterContract: AddPresenterContract by lazy {
-        AddPresenterImpl(this, ListModelContractImpl(fileSystem = FileSystemImpl(
-            this
-        )
-        ))
+    private val presenterContract: AddPresenterContract by lazy {
+        AddPresenterImpl(this, ListModelContractImpl(fileSystem = FileSystemImpl(this)))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
